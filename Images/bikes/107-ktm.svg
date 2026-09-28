@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" role="img" aria-label="KTM 107">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#243247"/>
+      <stop offset="1" stop-color="#101826"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg)"/>
+  <g fill="none" stroke="#fb8c00" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="95" cy="178" r="42"/>
+    <circle cx="300" cy="178" r="42"/>
+    <path d="M95 178 H300"/>
+    <path d="M95 178 L150 118"/>
+    <path d="M150 118 L205 178"/>
+    <path d="M150 118 L250 120"/>
+    <path d="M250 120 L300 178"/>
+    <path d="M250 120 L264 90"/>
+    <path d="M136 116 L190 116"/>
+  </g>
+  <text x="200" y="238" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="600" fill="#e5e7eb">KTM 107</text>
+</svg>

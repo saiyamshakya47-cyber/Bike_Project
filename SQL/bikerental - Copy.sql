@@ -51,10 +51,11 @@ INSERT INTO `admin` (`email`, `password`) VALUES
 CREATE TABLE `bike` (
   `bike_id` int(5) NOT NULL,
   `bike_name` varchar(20) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `model` year(4) NOT NULL,
   `color` varchar(10) NOT NULL,
   `bike_type` varchar(10) NOT NULL,
-  `price` int(4) NOT NULL,
+  `price` int(7) NOT NULL COMMENT 'Rental price per hour in Nepali Rupees (NPR)',
   `term_id` int(5) NOT NULL,
   `avail` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -63,17 +64,17 @@ CREATE TABLE `bike` (
 -- Dumping data for table `bike`
 --
 
-INSERT INTO `bike` (`bike_id`, `bike_name`, `model`, `color`, `bike_type`, `price`, `term_id`, `avail`) VALUES
-(101, 'Pulsar', 2017, 'Black', 'bike', 30, 1020, 1),
-(102, 'RX100', 1999, 'Red', 'bike', 32, 1021, 1),
-(103, 'Activa', 2018, 'Blue', 'scooter', 25, 1022, 1),
-(104, 'Jupiter', 2016, 'Grey', 'scooter', 26, 1022, 1),
-(105, 'ApacheRTR', 2019, 'white', 'bike', 30, 1020, 1),
-(106, 'Vespa', 2017, 'Red', 'scooter', 23, 1021, 1),
-(107, 'KTM', 2015, 'Orange', 'bike', 32, 1023, 1),
-(108, 'Pleasure', 2012, 'white', 'scooter', 24, 1023, 1),
-(109, 'YamahaRay', 2010, 'Red', 'scooter', 26, 1022, 1),
-(110, 'Hero', 2019, 'Black', 'bike', 20, 1022, 1);
+INSERT INTO `bike` (`bike_id`, `bike_name`, `image`, `model`, `color`, `bike_type`, `price`, `term_id`, `avail`) VALUES
+(101, 'Pulsar', '101-pulsar.svg', 2017, 'Black', 'bike', 1500, 1020, 1),
+(102, 'RX100', '102-rx100.svg', 1999, 'Red', 'bike', 1500, 1021, 1),
+(103, 'Activa', '103-activa.svg', 2018, 'Blue', 'scooter', 1200, 1022, 1),
+(104, 'Jupiter', '104-jupiter.svg', 2016, 'Grey', 'scooter', 1200, 1022, 1),
+(105, 'ApacheRTR', '105-apachertr.svg', 2019, 'white', 'bike', 1500, 1020, 1),
+(106, 'Vespa', '106-vespa.svg', 2017, 'Red', 'scooter', 1200, 1021, 1),
+(107, 'KTM', '107-ktm.svg', 2015, 'Orange', 'bike', 1500, 1023, 1),
+(108, 'Pleasure', '108-pleasure.svg', 2012, 'white', 'scooter', 1200, 1023, 1),
+(109, 'YamahaRay', '109-yamaharay.svg', 2010, 'Red', 'scooter', 1200, 1022, 1),
+(110, 'Hero', '110-hero.svg', 2019, 'Black', 'bike', 1200, 1022, 1);
 
 --
 -- Triggers `bike`
@@ -111,10 +112,10 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`email`, `bike_id`, `cost`, `mode`, `receipt_no`, `date`) VALUES
-('vinay@gmail.com', 102, '512.00', 'card', 22, '2019-11-12 13:15:00'),
-('pavan@gmail.com', 103, '640.00', 'paypal', 25, '2019-11-13 13:13:00'),
-('vinay@gmail.com', 102, '1568.00', 'Card', 48, '2019-11-28 11:49:38'),
-('vinay@gmail.com', 104, '1118.00', 'Card', 50, '2019-11-29 11:59:27');
+('vinay@gmail.com', 102, '10800.00', 'card', 22, '2019-11-12 13:15:00'),
+('pavan@gmail.com', 103, '2800.00', 'paypal', 25, '2019-11-13 13:13:00'),
+('vinay@gmail.com', 102, '4500.00', 'Card', 48, '2019-11-28 11:49:38'),
+('vinay@gmail.com', 104, '350.00', 'Card', 50, '2019-11-29 11:59:27');
 
 -- --------------------------------------------------------
 
@@ -287,6 +288,34 @@ ALTER TABLE `payment`
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`bike_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- Routines
+--
+-- spcost is called by ongointns.php as CALL spcost($seconds, $bike_id)
+-- where $seconds is the ride duration. It converts seconds to hours
+-- and bills the hourly NPR rate with a 1 hour minimum.
+--
+
+DELIMITER $$
+CREATE PROCEDURE `spcost`(IN p_seconds INT, IN p_bikeid INT)
+BEGIN
+  DECLARE v_hours DECIMAL(10,2);
+  DECLARE v_price INT DEFAULT 0;
+
+  SELECT `price` INTO v_price FROM `bike` WHERE `bike_id` = p_bikeid;
+
+  SET v_hours = GREATEST(ROUND(p_seconds / 3600, 2), 1);
+
+  UPDATE `payment`
+     SET `cost` = v_hours * v_price
+   WHERE `bike_id` = p_bikeid
+     AND `date` IS NULL;
+END$$
+DELIMITER ;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
+include 'helpers.php';
 
 if (!isset($_SESSION['uemail'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -58,10 +59,10 @@ $diff = strtotime($end)-strtotime($start);
     <tr><td class="item">User Name</td><td><?php echo $_SESSION['fname'] . " " . $_SESSION['lname'];?></td></tr> 
 		<!-- Not Necessary<tr><td class="item">Bike Id</td><td><?php echo $row1['bike_id'];?></td></tr> -->
 		<tr><td class="item">Bike Name</td><td><?php echo $row2['bike_name'];?></td></tr>
-		<tr><td class="item">Bike Rent</td><td>₹<?php echo $row2['price'];?>/hour</td></tr>
-    <tr><td class="item">Duration</td><td><?php echo $diff;?>hours</td></tr>
+		<tr><td class="item">Bike Rent</td><td><?php echo npr_rate($row2['price']);?></td></tr>
+    <tr><td class="item">Duration</td><td><?php echo number_format(max($diff / 3600, 1), 2);?> hours (1 hour minimum)</td></tr>
     <tr><td class="item">Receipt no</td><td>No.<?php echo $row1['receipt_no'];?></td></tr>
-    <tr><td class="item">Cost</td><td>₹<?php echo $row1['cost'];?></td></tr>
+    <tr><td class="item">Cost</td><td><?php echo npr($row1['cost']);?></td></tr>
     <tr><td class="item">Payment Method</td><td><?php echo $row1['mode'];?></td></tr>
 	  <tr><td class="item">Date</td><td><?php echo $row1['date'];?></td></tr>
 

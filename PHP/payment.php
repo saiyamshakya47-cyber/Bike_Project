@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
+include 'helpers.php';
 
 if (!isset($_SESSION['uemail'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -58,7 +59,7 @@ if(isset($_POST['pay'])){
     <div class="checkout-panel">
     
       <div class="panel-body">
-        <h2 class="title">Payment Total : ₹<?php echo $row1['cost'];?></h2>
+        <h2 class="title">Payment Total : <?php echo npr($row1['cost']);?></h2>
 
      
          <script type="text/javascript" src="payment.js"></script>
@@ -72,7 +73,7 @@ if(isset($_POST['pay'])){
 
               <div class="radio-input">
                <input id="card" name="payment" type="radio" value="Card">
-                Pay ₹<?php echo $row1['cost'];?> with credit card
+                Pay <?php echo npr($row1['cost']);?> with credit card
               </div>
             </label>
 
@@ -80,7 +81,7 @@ if(isset($_POST['pay'])){
               <img src="../images/esewa.png"/>
               <div class="radio-input">
                 <input  id="esewa" name="payment" type="radio" value="esewa">
-                Pay ₹<?php echo $row1['cost'];?> with esewa
+                Pay <?php echo npr($row1['cost']);?> with esewa
               </div>
             </label>
           </div>

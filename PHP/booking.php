@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
+include 'helpers.php';
 
 if (!isset($_SESSION['uemail'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -44,6 +45,8 @@ $row1 =mysqli_fetch_array($result1);
 <div class="page-wrapper">
 
   <div class="tab">
+  <p class="title"><?php echo $row1['bike_name'];?></p>
+  <img class="bike_photo" src="<?php echo bike_image($row1['image']);?>" alt="<?php echo $row1['bike_name'];?>">
   <table class="table">
 	 <tr><td class="item">User Name</td><td><?php echo $_SESSION['fname'] . " " . $_SESSION['lname'];?></td></tr> 
 		<tr><td class="item">BIKE ID</td><td><?php echo $row1['bike_id'];?></td></tr>
@@ -51,7 +54,7 @@ $row1 =mysqli_fetch_array($result1);
 		<tr><td class="item">MODEL</td><td><?php echo $row1['model'];?></td></tr>
 		<tr><td class="item">COLOR</td><td><?php echo $row1['color'];?></td></tr>
 		<tr><td class="item">TYPE</td><td><?php echo $row1['bike_type'];?></td></tr>
-		<tr><td class="item">PRICE</td><td>₹<?php echo $row1['price'];?>/hour</td></tr>
+		<tr><td class="item">PRICE</td><td><?php echo npr_rate($row1['price']);?></td></tr>
 	 
 
 	</table>

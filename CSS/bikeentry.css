@@ -9,7 +9,7 @@ body{
 
 
 .page-wrapper{
-  min-height: 1030px;
+  min-height: 1150px;
 }
 .box{
   width: 300px;
@@ -45,6 +45,28 @@ body{
   color: white;
   border-radius: 24px;
   transition: 0.25s;
+}
+.box input[type = "file"] {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  color: grey;
+  font-size: 13px;
+  width: 220px;
+}
+.box input[type = "file"]::file-selector-button {
+  border: 2px solid #3498db;
+  background: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 16px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.box input[type = "file"]::file-selector-button:hover {
+  background: #2ecc71;
+  border-color: #2ecc71;
 }
 .bike_type{
   border:0;

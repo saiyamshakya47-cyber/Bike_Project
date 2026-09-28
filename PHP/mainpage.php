@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
+include 'helpers.php';
 
 if (!isset($_SESSION['uemail'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -74,7 +75,7 @@ $result3=mysqli_query($conn,$query3);
     
     echo "<tr><td class='item'>BIKE ID</td><td>$bikeid1</td></tr>";
     echo "<tr><td class='item'>BIKE NAME</td><td>$bikename1</td></tr>";
-    echo "<tr><td class='item'>PRICE</td><td>₹$price1/hour</td></tr>";
+    echo "<tr><td class='item'>PRICE</td><td>".npr_rate($price1)."</td></tr>";
     echo "<tr><td class='item'>START TIME</td><td>$starttime1</td></tr>";
 
     echo "</table>";

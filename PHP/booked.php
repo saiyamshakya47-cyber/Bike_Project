@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
+include 'helpers.php';
 
 if (!isset($_SESSION['uemail'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -60,6 +61,7 @@ mysqli_query($conn,$query4);
 
   <div class="tab">
     <p class="title">BIKE BOOKED</p>
+  <img class="bike_photo" src="<?php echo bike_image($row1['image']);?>" alt="<?php echo $row1['bike_name'];?>">
   <table class="table">
 	  
     <tr><td class="item">User Name</td><td><?php echo $_SESSION['fname'] . " " . $_SESSION['lname'];?></td></tr> 
@@ -68,7 +70,7 @@ mysqli_query($conn,$query4);
 		<tr><td class="item">MODEL</td><td><?php echo $row1['model'];?></td></tr>
 		<tr><td class="item">COLOR</td><td><?php echo $row1['color'];?></td></tr>
 		<tr><td class="item">TYPE</td><td><?php echo $row1['bike_type'];?></td></tr>
-		<tr><td class="item">PRICE</td><td>₹<?php echo $row1['price'];?>/hour</td></tr>
+		<tr><td class="item">PRICE</td><td><?php echo npr_rate($row1['price']);?></td></tr>
 	 
 
 	</table>

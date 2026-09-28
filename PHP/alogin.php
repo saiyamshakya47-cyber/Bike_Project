@@ -42,6 +42,7 @@ $error="Invalid Email or Password";
   <head>
     <meta charset="utf-8">
     <title>َAdmin Login</title>
+  
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/footer.css">

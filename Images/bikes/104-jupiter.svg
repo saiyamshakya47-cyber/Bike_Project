@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" role="img" aria-label="Jupiter 104">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#243247"/>
+      <stop offset="1" stop-color="#101826"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg)"/>
+  <g fill="none" stroke="#b0bec5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="108" cy="182" r="38"/>
+    <circle cx="300" cy="182" r="38"/>
+    <path d="M108 182 H300"/>
+    <path d="M108 182 L152 150"/>
+    <path d="M152 150 H228 V182"/>
+    <path d="M228 150 L256 106 L288 104"/>
+    <path d="M198 146 L246 146"/>
+  </g>
+  <text x="200" y="238" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="600" fill="#e5e7eb">Jupiter 104</text>
+</svg>

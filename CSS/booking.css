@@ -13,7 +13,7 @@ body{
 .tab {
   background: #34495E;
   width: 500px;
-  height: 700px;
+  min-height: 700px;
   margin-left: 400px;
   border-radius: 15px;
 
@@ -27,6 +27,17 @@ body{
   font-weight: bolder;
 }
 
+.bike_photo {
+  display: block;
+  width: 440px;
+  height: 220px;
+  object-fit: cover;
+  margin: 0 auto 18px;
+  border-radius: 12px;
+  border: 2px solid #2ecc71;
+  background: #101826;
+}
+
 
 /*DIVISION ENDS*/
 
@@ -35,7 +46,6 @@ body{
 
    margin: 1em 0;
   min-width: 400px;
-  height: 400px;
   background: #34495E;
   color: #fff;
   margin-left: 20px;

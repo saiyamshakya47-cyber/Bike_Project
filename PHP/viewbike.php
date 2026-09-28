@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'connection.php';
+include 'helpers.php';
 
 if (!isset($_SESSION['aemail'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -53,7 +54,7 @@ if($count1>0) {
 	echo "<th>Bike Name</th>";
 	echo "<th>Model</th>";
 	echo "<th>Color</th>";
-  echo "<th>Price</th>";
+  echo "<th>Price (Rs./hour)</th>";
   echo "<th>Terminal</th>";
 	echo "<tr>";
 	echo "</thead>";
@@ -74,7 +75,7 @@ if($count1>0) {
     echo $row1['color'];
     echo "</td>";
     echo "<td>";
-    echo $row1['price'];
+    echo npr_rate($row1['price']);
     echo "</td>";
     echo "<td>";
     echo $row1['term_id'];

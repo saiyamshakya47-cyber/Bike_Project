@@ -1,0 +1,13 @@
+# Uploaded bike photos only. Never execute anything as a script from here.
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+  php_flag engine off
+</IfModule>
+
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar
+AddType text/plain .php .phtml .php3 .php4 .php5 .php7 .php8 .pht .phar
+
+Options -ExecCGI -Indexes
